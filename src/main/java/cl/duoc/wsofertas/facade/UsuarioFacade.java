@@ -19,7 +19,7 @@ import org.apache.log4j.Logger;
  */
 @Stateless
 public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFacadeLocal {
-    
+
     private final static Logger logger = Logger.getLogger(UsuarioFacade.class);
 
     @PersistenceContext(unitName = "cl.duoc_WSOfertas_war_1.0-SNAPSHOTPU")
@@ -37,19 +37,19 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     @Override
     public Usuario obtenerUsuarioPorLogin(String loginUsuario) {
         Query query = null;
-        try{
+        try {
             query = em.createQuery("SELECT m FROM Usuario m WHERE m.login = :loginUsuario", Usuario.class);
             query.setParameter("loginUsuario", loginUsuario.trim());
             Usuario usu = (Usuario) query.getSingleResult();
             return usu;
-        }catch(NoResultException e){
+        } catch (NoResultException e) {
             return null;
-        }catch(Exception e){
+        } catch (Exception e) {
             logger.error("Error grave obteniendo usuario para login: " + loginUsuario, e);
             throw new RuntimeException(e);
-        }finally{
+        } finally {
             query = null;
         }
     }
-    
+
 }

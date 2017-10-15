@@ -7,12 +7,15 @@ package cl.duoc.wsofertas.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -38,7 +41,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Funcionalidad.findByDescripcion", query = "SELECT f FROM Funcionalidad f WHERE f.descripcion = :descripcion")
     , @NamedQuery(name = "Funcionalidad.findByIsactivo", query = "SELECT f FROM Funcionalidad f WHERE f.isactivo = :isactivo")
     , @NamedQuery(name = "Funcionalidad.findByFechacreacion", query = "SELECT f FROM Funcionalidad f WHERE f.fechacreacion = :fechacreacion")
-    , @NamedQuery(name = "Funcionalidad.findByFechamodificacion", query = "SELECT f FROM Funcionalidad f WHERE f.fechamodificacion = :fechamodificacion")})
+    , @NamedQuery(name = "Funcionalidad.findByFechamodificacion", query = "SELECT f FROM Funcionalidad f WHERE f.fechamodificacion = :fechamodificacion")
+    , @NamedQuery(name = "Funcionalidad.findByIsweb", query = "SELECT f FROM Funcionalidad f WHERE f.isweb = :isweb")
+    , @NamedQuery(name = "Funcionalidad.findByIsescritorio", query = "SELECT f FROM Funcionalidad f WHERE f.isescritorio = :isescritorio")})
 public class Funcionalidad implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,14 +60,21 @@ public class Funcionalidad implements Serializable {
     @Column(name = "DESCRIPCION")
     private String descripcion;
     @Column(name = "ISACTIVO")
-    private Short isactivo;
+    private BigInteger isactivo;
     @Column(name = "FECHACREACION")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechacreacion;
     @Column(name = "FECHAMODIFICACION")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechamodificacion;
-    @ManyToMany(mappedBy = "funcionalidadList")
+    @Column(name = "ISWEB")
+    private BigInteger isweb;
+    @Column(name = "ISESCRITORIO")
+    private BigInteger isescritorio;
+    @JoinTable(name = "RL_FUNC_PERFIL", joinColumns = {
+        @JoinColumn(name = "FUNCIONALIDAD_IDFUNCIONALIDAD", referencedColumnName = "IDFUNCIONALIDAD")}, inverseJoinColumns = {
+        @JoinColumn(name = "PERFIL_IDPERFIL", referencedColumnName = "IDPERFIL")})
+    @ManyToMany
     private List<Perfil> perfilList;
 
     public Funcionalidad() {
@@ -96,11 +108,11 @@ public class Funcionalidad implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Short getIsactivo() {
+    public BigInteger getIsactivo() {
         return isactivo;
     }
 
-    public void setIsactivo(Short isactivo) {
+    public void setIsactivo(BigInteger isactivo) {
         this.isactivo = isactivo;
     }
 
@@ -118,6 +130,22 @@ public class Funcionalidad implements Serializable {
 
     public void setFechamodificacion(Date fechamodificacion) {
         this.fechamodificacion = fechamodificacion;
+    }
+
+    public BigInteger getIsweb() {
+        return isweb;
+    }
+
+    public void setIsweb(BigInteger isweb) {
+        this.isweb = isweb;
+    }
+
+    public BigInteger getIsescritorio() {
+        return isescritorio;
+    }
+
+    public void setIsescritorio(BigInteger isescritorio) {
+        this.isescritorio = isescritorio;
     }
 
     @XmlTransient

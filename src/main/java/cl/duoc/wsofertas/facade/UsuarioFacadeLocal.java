@@ -31,5 +31,4 @@ public interface UsuarioFacadeLocal {
     int count();
     
     public Usuario obtenerUsuarioPorLogin(String loginUsuario);
-    
 }
