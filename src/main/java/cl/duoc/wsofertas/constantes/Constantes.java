@@ -31,10 +31,10 @@ public class Constantes {
     public static final String DESC_ERROR_PASSWORD_LOGIN_WS = "Error: La password es obligatoria.";
 
     public static final int CODIGO_ERROR_USUARIO_NO_EXISTE_WS = 4;
-    public static final String DESC_ERROR_USUARIO_NO_EXISTE_WS = "Error: Usuario o password incorrectas.";
+    public static final String DESC_ERROR_USUARIO_NO_EXISTE_WS = "Error: Usuario o password inválido.";
 
     public static final int CODIGO_ERROR_PASSWORD_INCORRECTA_WS = 4;
-    public static final String DESC_ERROR_PASSWORD_INCORRECTA_WS = "Error: Usuario o password incorrectas.";
+    public static final String DESC_ERROR_PASSWORD_INCORRECTA_WS = "Error: Usuario o password inválido.";
 
     public static final int CODIGO_LOGIN_CORRECTO_WS = 0;
     public static final String DESC_LOGIN_CORRECTO_WS = "Login correcto.";
